@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+group = 'ru.rvschool'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.13.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+
+    testImplementation 'org.assertj:assertj-core:3.27.7'
+
+    implementation group: 'io.qameta.allure', name: 'allure-junit5', version: '2.29.0'
+
+    implementation group: 'com.codeborne', name: 'selenide', version: '7.5.1'
+}
+
+test {
+    useJUnitPlatform()
+
+    systemProperty "allure.results.directory", "build/allure-results"
+}
