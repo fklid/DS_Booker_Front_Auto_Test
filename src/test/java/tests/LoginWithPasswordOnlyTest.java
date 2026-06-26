@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LoginWithUsernameOnlyTest extends BaseTest {
+public class LoginWithPasswordOnlyTest extends BaseTest {
     private static LoginPage loginPage;
 
     @BeforeEach
@@ -20,13 +20,13 @@ public class LoginWithUsernameOnlyTest extends BaseTest {
     }
 
     @Test
-    public void loginWithUsernameOnlyTest() {
-        loginPage.loginUsernameOnly("user01test");
+    public void testLoginWithPasswordOnly() {
+        loginPage.loginPasswordOnly("test PASSWORD");
 
-        assertTrue(loginPage.isEmptyPasswordMessage());
+        assertTrue(loginPage.isEmptyUsernameMessage());
 
-        String expectedErrorMessage = "Введите пароль";
-        String actualErrorMessage = loginPage.getEmptyPasswordMessage();
+        String expectedErrorMessage = "Введите логин";
+        String actualErrorMessage = loginPage.getEmptyUsernameErrorMessage();
         assertEquals(expectedErrorMessage, actualErrorMessage, "Не верный текст ошибки");
     }
 }

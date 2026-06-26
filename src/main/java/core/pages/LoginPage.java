@@ -18,8 +18,8 @@ public class LoginPage extends BasePage {
     // Локатор элемента с сообщением об ошибке
     private SelenideElement errorMessage = $x("//span[text()='Неправильно указан логин и/или пароль']");
 
-    private SelenideElement emptyCredentials = $x("//span[text()='Введите пароль']");
-    private SelenideElement invalidCredentials = $x("//form[@id='loginForm']//div[contains(text(), 'Пользователь с таким телефоном, почтой или логином не найден.')]");
+    private SelenideElement emptyPassword = $x("//span[text()='Введите пароль']");
+    private SelenideElement emptyUsername = $x("//span[text()='Введите логин']");
 
 
     {
@@ -55,36 +55,47 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Проверка при входе без учетных данных, появляется сообщение об ошибке входа в систему")
-    public boolean isErrorMessagePresent() {
-        return emptyCredentials.shouldBe(visible).exists();
+    public boolean isErrorMessage() {
+        return errorMessage.shouldBe(visible).exists();
     }
 
-    @Step("Проверка сообщение об ошибке 'отсутствует имя пользователя'")
-    public boolean IsinvalidUsernameMessagePresent() {
-        return invalidCredentials.shouldBe(visible).exists();
-    }
 
     @Step("Получить текст ошибки об отсутствии имени пользователя")
-    public String getEmptyUsernameErrorMessage() {
-        return emptyCredentials.shouldBe(visible).getText();
+    public String getEmptyUsernameMessage() {
+        return emptyUsername.shouldBe(visible).getText();
     }
-    @Step("Проверка входа  только под именем пользователя")
+    @Step("Проверка входа только под именем пользователя")
     public void loginUsernameOnly(String username){
         usernameField.shouldBe(visible).click();
         usernameField.shouldBe(visible).setValue(username);
         loginButton.shouldBe(visible).click();
     }
 
-    @Step("Check that missing password error message appears")
+    @Step("Проверка входа только с паролем")
+    public void loginPasswordOnly(String password){
+        passwordField.shouldBe(visible).click();
+        passwordField.shouldBe(visible).setValue(password);
+        loginButton.shouldBe(visible).click();
+    }
+
+    @Step("Проверка сообщение об ошибке с пропущенным паролем")
     public boolean isEmptyPasswordMessage() {
-        return emptyCredentials.shouldBe(visible).exists();
+        return emptyPassword.shouldBe(visible).exists();
     }
 
-    @Step("Obtain missing password error text")
-    public String getMissingPasswordErrorMessage() {
-        return emptyCredentials.shouldBe(visible).getText();
+    @Step("Проверка ввода только пароля")
+    public boolean isEmptyUsernameMessage() {
+        return emptyUsername.shouldBe(visible).exists();
     }
 
+    @Step("Получить сообщение об ошибки с пропущенным паролем")
+    public String getEmptyPasswordMessage() {
+        return emptyPassword.shouldBe(visible).getText();
+    }
 
+    @Step("Получить сообщение об ошибке отсутствия имени пользователя")
+    public String getEmptyUsernameErrorMessage() {
+        return emptyUsername.shouldBe(visible).getText();
+    }
 
 }
