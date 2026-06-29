@@ -98,4 +98,9 @@ public class LoginPage extends BasePage {
         return emptyUsername.shouldBe(visible).getText();
     }
 
+    @Step("Нажимаем Восстановить профиль")
+    public void goToRecovery() {
+        goToRecoveryButton.shouldBe(visible).click();
+    }
+
 }
