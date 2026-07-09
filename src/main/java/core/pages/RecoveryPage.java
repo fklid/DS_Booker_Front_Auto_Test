@@ -8,11 +8,11 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 
-    public class AnonymRecoveryPage extends BasePage {
+    public class RecoveryPage extends BasePage {
 
-        private SelenideElement recoveryByPhoneButton = $("[data-l='t,phone']");
-        private SelenideElement recoveryByEmailButton = $("[data-l='t,email']");
-        private SelenideElement goToSupportButton = $("[data-l='t,support']");
+        private SelenideElement recoveryByPhoneButton = $("[data-test-id='recovery-phone-btn']");
+        private SelenideElement recoveryByEmailButton = $("[data-test-id= 'recovery-email-btn']");
+        private SelenideElement goToSupportButton = $("[data-test-id='support-contact-btn']");
 
         {
             verifyPageElements();

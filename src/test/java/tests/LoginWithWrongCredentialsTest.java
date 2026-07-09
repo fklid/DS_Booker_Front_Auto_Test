@@ -17,7 +17,7 @@ public class LoginWithWrongCredentialsTest extends BaseTest {
     public void prepare() {
         open(baseUrl);
         loginPage = new LoginPage();
-//        loginPage.acceptCookies();
+        loginPage.acceptCookies();
 //        loginPage.acceptPrivacyButton();
 
 
@@ -30,7 +30,7 @@ public class LoginWithWrongCredentialsTest extends BaseTest {
 
         assertTrue(loginPage.isErrorMessageVisible(), "Сообщение об ошибке не отображается");
 
-        String expectedErrorMessage = "Неправильно указан логин и/или пароль";
+        String expectedErrorMessage = "Пользователь с таким телефоном, почтой или логином не найден. Проверьте данные и попробуйте снова.";
         String actualErrorMessage = loginPage. getErrorMessageText();
         assertEquals(expectedErrorMessage, actualErrorMessage, "Текст сообщения об ошибке не совпадает");
 

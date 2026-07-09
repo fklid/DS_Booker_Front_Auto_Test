@@ -9,17 +9,18 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class LoginPage extends BasePage {
-    private SelenideElement usernameField = $("[data-test-id='login-input']");
-    private SelenideElement passwordField = $("[data-test-id='password-input']");
-    private SelenideElement loginButton = $("[data-test-id='enter-action']");
-    private SelenideElement accessRecovery = $x("//button class [text()='Не получается войти?']");
-    private SelenideElement registerButton = $x("//a[text()='Зарегистрироваться']");
+    private SelenideElement usernameField = $("[data-test-id='login-phone-email']");
+    private SelenideElement passwordField = $("[data-test-id='login-password']");
+    private SelenideElement loginButton = $("[data-test-id='login-submit-btn']");
+    private SelenideElement accessRecovery =   $("[data-test-id='forgot-password-link']");
+    private SelenideElement registerButton = $x("//div[@id='hero-buttons']//button[@id='hero-register-btn']");
 
     // Локатор элемента с сообщением об ошибке
-    private SelenideElement errorMessage = $x("//span[text()='Неправильно указан логин и/или пароль']");
+    private SelenideElement errorMessage = $x("//form[@id='loginForm']//div[contains(text(), 'Пользователь с таким телефоном, почтой или логином не найден.')]");
 
-    private SelenideElement emptyPassword = $x("//span[text()='Введите пароль']");
-    private SelenideElement emptyUsername = $x("//span[text()='Введите логин']");
+    private SelenideElement emptyPassword = $x("//form[@id='loginForm']//div[contains(text(), 'Введите телефон, email или логин и пароль.')]");
+    private SelenideElement emptyUsername =  $x("//form[@id='loginForm']//div[contains(text(), 'Введите телефон, email или логин и пароль.')]");
+    private SelenideElement recoveryButton = $("[data-test-id='lockout-recover-btn']");
 
 
     {
@@ -98,9 +99,16 @@ public class LoginPage extends BasePage {
         return emptyUsername.shouldBe(visible).getText();
     }
 
-    @Step("Нажимаем Восстановить профиль")
-    public void goToRecovery() {
-        goToRecoveryButton.shouldBe(visible).click();
+
+
+    @Step("Переходим на страницу восстановления доступа")
+    public void accessRecovery() {
+        accessRecovery.shouldBe(visible).click();
+    }
+
+    @Step("Go to recovery page by button")
+    public void goToRecoveryPage() {
+        recoveryButton.shouldBe(visible).click();
     }
 
 }

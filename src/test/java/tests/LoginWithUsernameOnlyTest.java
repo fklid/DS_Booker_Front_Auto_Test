@@ -16,7 +16,7 @@ public class LoginWithUsernameOnlyTest extends BaseTest {
     public void prepare() {
         open(baseUrl);
         loginPage = new LoginPage();
-        //loginPage.acceptCookies();
+        loginPage.acceptCookies();
     }
 
     @Test
@@ -25,7 +25,7 @@ public class LoginWithUsernameOnlyTest extends BaseTest {
 
         assertTrue(loginPage.isEmptyPasswordMessage());
 
-        String expectedErrorMessage = "Введите пароль";
+        String expectedErrorMessage =  "Введите телефон, email или логин и пароль.";
         String actualErrorMessage = loginPage.getEmptyPasswordMessage();
         assertEquals(expectedErrorMessage, actualErrorMessage, "Не верный текст ошибки");
     }
