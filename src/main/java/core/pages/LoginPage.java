@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import core.base.BasePage;
 import io.qameta.allure.Step;
 
+import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
@@ -14,6 +15,10 @@ public class LoginPage extends BasePage {
     private SelenideElement loginButton = $("[data-test-id='login-submit-btn']");
     private SelenideElement accessRecovery =   $("[data-test-id='forgot-password-link']");
     private SelenideElement registerButton = $x("//div[@id='hero-buttons']//button[@id='hero-register-btn']");
+    private SelenideElement loginByQr = $("[data-test-id='tab-qr']");
+    private SelenideElement qrPlaceholder = $("[data-test-id='qr-placeholder']");
+    private SelenideElement qrCode = qrPlaceholder.$("svg");
+
 
     // Локатор элемента с сообщением об ошибке
     private SelenideElement errorMessage = $x("//form[@id='loginForm']//div[contains(text(), 'Пользователь с таким телефоном, почтой или логином не найден.')]");
@@ -109,6 +114,19 @@ public class LoginPage extends BasePage {
     @Step("Go to recovery page by button")
     public void goToRecoveryPage() {
         recoveryButton.shouldBe(visible).click();
+    }
+
+    @Step("Открыть экран QR")
+    public LoginPage openQrScreen() {
+        loginByQr.shouldBe(visible).click();
+        return this;
+    }
+
+    @Step("Проверка отображения элементов экрана QR")
+    public void checkQrScreen() {
+        qrPlaceholder.shouldBe(visible);
+        loginByQr.shouldHave(cssClass("active"));
+        qrCode.shouldBe(visible);
     }
 
 }
