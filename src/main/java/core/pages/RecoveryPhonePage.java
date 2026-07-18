@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class RecoveryPhonePage extends BasePage {
     private SelenideElement phoneEntryField = $("[data-test-id='phone-input']");
-    private SelenideElement countrySelectDropdown = $("[data-test-id='country-select']");
+    private SelenideElement countrySelectDropdown = $("[data-test-id='country-select-btn']");
     private SelenideElement getCodeButton = $("[data-test-id='phone-submit-btn']");
 
     {
@@ -33,9 +33,9 @@ public class RecoveryPhonePage extends BasePage {
     @Step("Выбор страны из списка")
     public String selectCountry(String countryName) {
         countrySelectDropdown.click();
-        SelenideElement countryItem = $x(String.format("//option[text()='%s']", countryName));
+        SelenideElement countryItem = $x(String.format("//div[@class='custom-select-option'][.//span[text()='%s']]", countryName));
         countryItem.scrollTo();
-        String countryCode = countryItem.attr("value");
+        String countryCode = countryItem.attr("data-value");
         countryItem.click();
         return countryCode;
     };
@@ -44,4 +44,6 @@ public class RecoveryPhonePage extends BasePage {
     public void submitPhoneNumber() {
         getCodeButton.click();
     }
+
+
 }
