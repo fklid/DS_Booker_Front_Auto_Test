@@ -1,15 +1,11 @@
 package tests;
 
-
-
 import core.base.BaseTest;
 import core.pages.LoginPage;
 import core.pages.RecoveryPage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Configuration.baseUrl;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 
@@ -29,7 +25,7 @@ public class SupportChatTest extends BaseTest {
         loginPage.accessRecovery();
         recoveryPage = new RecoveryPage();
 
-        recoveryPage.referToSupport();
+        recoveryPage.openSupportChat();
         recoveryPage.closeChat();
         recoveryPage.checkChatClosed();
     }

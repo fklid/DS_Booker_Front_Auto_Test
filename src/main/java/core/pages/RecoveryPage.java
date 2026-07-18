@@ -13,7 +13,7 @@ public class RecoveryPage extends BasePage {
 
     private SelenideElement recoveryByPhoneButton = $("[data-test-id='recovery-phone-btn']");
     private SelenideElement recoveryByEmailButton = $("[data-test-id= 'recovery-email-btn']");
-    private SelenideElement goToSupportButton = $("[data-test-id='support-contact-btn']");
+    private SelenideElement SupportButton = $("[data-test-id='support-contact-btn']");
     private SelenideElement supportChat = $x("//div[@class='support-dialog']");
     private SelenideElement closeChatButton = $("[data-test-id='support-dialog-close']");
 
@@ -25,7 +25,7 @@ public class RecoveryPage extends BasePage {
     private void verifyPageElements() {
         recoveryByPhoneButton.shouldBe(visible);
         recoveryByEmailButton.shouldBe(visible);
-        goToSupportButton.shouldBe(visible);
+        SupportButton.shouldBe(visible);
     }
 
     @Step("Нажимаем на кнопку восстановления через телефон")
@@ -40,12 +40,12 @@ public class RecoveryPage extends BasePage {
 
     @Step("Переходим к технической поддержке")
     public void goToSupport() {
-        goToSupportButton.shouldBe(visible).click();
+        SupportButton.shouldBe(visible).click();
     }
 
     @Step("Открыть чат поддержки")
-    public void referToSupport() {
-        goToSupportButton.shouldBe(visible).click();
+    public void openSupportChat() {
+        SupportButton.shouldBe(visible).click();
         supportChat.shouldBe(visible);
     }
 
