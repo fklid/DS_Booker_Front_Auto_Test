@@ -6,8 +6,10 @@ import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selectors.byText;
 
 public class LoginPage extends BasePage {
     private SelenideElement usernameField = $("[data-test-id='login-phone-email']");
@@ -26,6 +28,11 @@ public class LoginPage extends BasePage {
     private SelenideElement emptyPassword = $x("//form[@id='loginForm']//div[contains(text(), 'Введите телефон, email или логин и пароль.')]");
     private SelenideElement emptyUsername =  $x("//form[@id='loginForm']//div[contains(text(), 'Введите телефон, email или логин и пароль.')]");
     private SelenideElement recoveryButton = $("[data-test-id='lockout-recover-btn']");
+
+    // Страница поиска
+    private SelenideElement searchInput = $("[data-test-id='search-input']");
+    private SelenideElement searchResultsList = $("[data-test-id='search-results']");
+
 
 
     {
@@ -128,5 +135,18 @@ public class LoginPage extends BasePage {
         loginByQr.shouldHave(cssClass("active"));
         qrCode.shouldBe(visible);
     }
+
+    @Step("Ввод запроса '{query}' в поле поиска и ожидание результатов")
+    public void getSearchResults(String query) {
+        searchInput.shouldBe(visible).click();
+        searchInput.setValue(query);
+        searchResultsList.shouldBe(visible);
+    }
+
+    @Step("Выбор результата '{groupName}' из списка поиска")
+    public void selectResultFromList(String groupName) {
+        $(byText(groupName)).shouldBe(visible).scrollTo().click();
+    }
+
 
 }
