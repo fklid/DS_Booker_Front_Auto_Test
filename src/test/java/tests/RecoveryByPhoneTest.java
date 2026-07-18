@@ -36,7 +36,7 @@ public class RecoveryByPhoneTest extends BaseTest {
         recoveryPhonePage = new RecoveryPhonePage();
 
         String countryCode = recoveryPhonePage.selectCountry("Аргентина");
-        assertEquals("+54", countryCode, "Неверный код");
+        assertEquals("+54", countryCode, "Не верный код");
 
         recoveryPhonePage.submitPhoneNumber();
     }
