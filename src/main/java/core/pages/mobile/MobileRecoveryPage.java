@@ -1,4 +1,4 @@
-package core.pages;
+package core.pages.mobile;
 
 import com.codeborne.selenide.SelenideElement;
 import core.base.BasePage;
@@ -9,13 +9,13 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 
-public class RecoveryPage extends BasePage {
-
-    private SelenideElement recoveryByPhoneButton = $("[data-test-id='recovery-phone-btn']");
-    private SelenideElement recoveryByEmailButton = $("[data-test-id= 'recovery-email-btn']");
+public class MobileRecoveryPage extends BasePage {
+    private SelenideElement recoveryPhoneButton = $("[data-test-id='recovery-phone-btn']");
+    private SelenideElement recoveryEmailButton = $("[data-test-id='recovery-email-btn']");
     private SelenideElement SupportButton = $("[data-test-id='support-contact-btn']");
     private SelenideElement supportChat = $x("//div[@class='support-dialog']");
     private SelenideElement closeChatButton = $("[data-test-id='support-dialog-close']");
+    private SelenideElement returnToLoginButton = $("[data-test-id='btn-back']");
 
     {
         verifyPageElements();
@@ -23,33 +23,28 @@ public class RecoveryPage extends BasePage {
 
     @Step("Проверяем видимость всех элементов на странице восстановления пароля")
     private void verifyPageElements() {
-        recoveryByPhoneButton.shouldBe(visible);
-        recoveryByEmailButton.shouldBe(visible);
+        recoveryPhoneButton.shouldBe(visible);
+        recoveryEmailButton.shouldBe(visible);
         SupportButton.shouldBe(visible);
     }
 
     @Step("Нажимаем на кнопку восстановления через телефон")
-    public void goToRecoveryByPhone() {
-        recoveryByPhoneButton.shouldBe(visible).click();
+    public void recoveryByPhone() {
+        recoveryPhoneButton.shouldBe(visible).click();
     }
 
     @Step("Нажимаем на кнопку восстановления через почту")
-    public void goToRecoveryByEmail() {
-        recoveryByEmailButton.shouldBe(visible).click();
+    public void recoveryByEmail() {
+        recoveryEmailButton.shouldBe(visible).click();
     }
 
     @Step("Переходим к технической поддержке")
-    public void goToSupport() {
-        SupportButton.shouldBe(visible).click();
-    }
-
-    @Step("Открыть чат поддержки")
-    public void openSupportChat() {
+    public void referToSupport() {
         SupportButton.shouldBe(visible).click();
         supportChat.shouldBe(visible);
     }
 
-    @Step("Закрыть чат поддержки")
+    @Step("Открыть чат поддержки")
     public void closeChat() {
         closeChatButton.shouldBe(visible).click();
     }
@@ -59,7 +54,8 @@ public class RecoveryPage extends BasePage {
         supportChat.shouldNotBe(visible);
     }
 
-
-
+    @Step("Переход на страницу авторизации")
+    public void returnToLogin() {
+        returnToLoginButton.shouldBe(visible).click();
+    }
 }
-

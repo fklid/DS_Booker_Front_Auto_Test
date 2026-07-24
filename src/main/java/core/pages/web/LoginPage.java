@@ -1,4 +1,4 @@
-package core.pages;
+package core.pages.web;
 
 import com.codeborne.selenide.SelenideElement;
 import core.base.BasePage;
@@ -9,7 +9,6 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selectors.byText;
 
 public class LoginPage extends BasePage {
     private SelenideElement usernameField = $("[data-test-id='login-phone-email']");
@@ -44,8 +43,7 @@ public class LoginPage extends BasePage {
         usernameField.shouldBe(visible);
         passwordField.shouldBe(visible);
         loginButton.shouldBe(visible);
-        // accessRecovery.shouldBe(visible);
-       // registerButton.shouldBe(visible);
+
     }
 
     @Step("Проверяем видимость сообщения об ошибке входа")
@@ -77,6 +75,7 @@ public class LoginPage extends BasePage {
     public String getEmptyUsernameMessage() {
         return emptyUsername.shouldBe(visible).getText();
     }
+
     @Step("Проверка входа только под именем пользователя")
     public void loginUsernameOnly(String username){
         usernameField.shouldBe(visible).click();
@@ -118,7 +117,7 @@ public class LoginPage extends BasePage {
         accessRecovery.shouldBe(visible).click();
     }
 
-    @Step("Go to recovery page by button")
+    @Step("Переход на страницу восстановления по кнопке")
     public void goToRecoveryPage() {
         recoveryButton.shouldBe(visible).click();
     }
