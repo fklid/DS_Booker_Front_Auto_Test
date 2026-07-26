@@ -1,7 +1,7 @@
-package tests;
+package tests.web;
 
 import core.base.BaseTest;
-import core.pages.LoginPage;
+import core.pages.web.LoginPage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +27,6 @@ public class LoginWithPasswordOnlyTest extends BaseTest {
 
         String expectedErrorMessage = "Введите телефон, email или логин и пароль.";
         String actualErrorMessage = loginPage.getEmptyUsernameErrorMessage();
-        assertEquals(expectedErrorMessage, actualErrorMessage, "Не верный текст ошибки");
+        assertEquals(expectedErrorMessage, actualErrorMessage, "Неверный текст ошибки");
     }
 }

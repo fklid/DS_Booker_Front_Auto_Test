@@ -1,4 +1,4 @@
-package core.pages;
+package core.pages.web;
 
 import com.codeborne.selenide.SelenideElement;
 import core.base.BasePage;
@@ -21,12 +21,12 @@ public class RecoveryEmailPage extends BasePage {
         getCodeButton.shouldBe(visible);
     }
 
-    @Step("Set email address")
+    @Step("Ввод email адреса")
     public void setEmailAddress(String email) {
         emailEntryField.setValue(email);
     }
 
-    @Step("Submit email address")
+    @Step("Подтверждение email адреса")
     public void submitEmailAddress() {
         getCodeButton.click();
     }

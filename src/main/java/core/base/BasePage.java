@@ -28,11 +28,6 @@ public abstract class BasePage {
     }
 
 
-    @Step("Открываем ВК сервисы")
-    public void openVKServices() {
-        vkServices.shouldBe(visible).click();
-    }
-
     @Step("Принимаем  cookies сайта")
     public void acceptCookies() {
         cookiesAccept.shouldBe(visible).click();

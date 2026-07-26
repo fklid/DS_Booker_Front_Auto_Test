@@ -1,4 +1,4 @@
-package core.pages;
+package core.pages.web;
 
 import com.codeborne.selenide.SelenideElement;
 import core.base.BasePage;
@@ -6,6 +6,7 @@ import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -27,6 +28,11 @@ public class LoginPage extends BasePage {
     private SelenideElement emptyUsername =  $x("//form[@id='loginForm']//div[contains(text(), 'Введите телефон, email или логин и пароль.')]");
     private SelenideElement recoveryButton = $("[data-test-id='lockout-recover-btn']");
 
+    // Страница поиска
+    private SelenideElement searchInput = $("[data-test-id='search-input']");
+    private SelenideElement searchResultsList = $("[data-test-id='search-results']");
+
+
 
     {
         verifyPageElements();
@@ -37,8 +43,7 @@ public class LoginPage extends BasePage {
         usernameField.shouldBe(visible);
         passwordField.shouldBe(visible);
         loginButton.shouldBe(visible);
-        // accessRecovery.shouldBe(visible);
-       // registerButton.shouldBe(visible);
+
     }
 
     @Step("Проверяем видимость сообщения об ошибке входа")
@@ -70,6 +75,7 @@ public class LoginPage extends BasePage {
     public String getEmptyUsernameMessage() {
         return emptyUsername.shouldBe(visible).getText();
     }
+
     @Step("Проверка входа только под именем пользователя")
     public void loginUsernameOnly(String username){
         usernameField.shouldBe(visible).click();
@@ -111,7 +117,7 @@ public class LoginPage extends BasePage {
         accessRecovery.shouldBe(visible).click();
     }
 
-    @Step("Go to recovery page by button")
+    @Step("Переход на страницу восстановления по кнопке")
     public void goToRecoveryPage() {
         recoveryButton.shouldBe(visible).click();
     }
@@ -128,5 +134,18 @@ public class LoginPage extends BasePage {
         loginByQr.shouldHave(cssClass("active"));
         qrCode.shouldBe(visible);
     }
+
+    @Step("Ввод запроса '{query}' в поле поиска и ожидание результатов")
+    public void getSearchResults(String query) {
+        searchInput.shouldBe(visible).click();
+        searchInput.setValue(query);
+        searchResultsList.shouldBe(visible);
+    }
+
+    @Step("Выбор результата '{groupName}' из списка поиска")
+    public void selectResultFromList(String groupName) {
+        $(byText(groupName)).shouldBe(visible).scrollTo().click();
+    }
+
 
 }
