@@ -97,11 +97,6 @@ public class MobileLoginPage extends BasePage {
         registerButton.shouldBe(visible).click();
     }
 
-//    @Step("Подтверждение  QR screen")
-//    public MobileLoginPage switchToQr() {
-//        loginByQr.shouldBe(visible).click();
-//        return this;
-//    }
 
     @Step("Открыть экран QR")
     public void assessQrTab() {
